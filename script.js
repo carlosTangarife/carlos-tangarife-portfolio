@@ -40,6 +40,22 @@ if (mobileMenuToggle) {
         navLinks.classList.toggle('active');
         mobileMenuToggle.classList.toggle('active');
     });
+    
+    // Close menu when clicking on a link
+    document.querySelectorAll('.nav-links a').forEach(link => {
+        link.addEventListener('click', () => {
+            navLinks.classList.remove('active');
+            mobileMenuToggle.classList.remove('active');
+        });
+    });
+    
+    // Close menu when clicking outside
+    document.addEventListener('click', (e) => {
+        if (!navLinks.contains(e.target) && !mobileMenuToggle.contains(e.target)) {
+            navLinks.classList.remove('active');
+            mobileMenuToggle.classList.remove('active');
+        }
+    });
 }
 
 // ====== Animate Elements on Scroll (Intersection Observer) ======
