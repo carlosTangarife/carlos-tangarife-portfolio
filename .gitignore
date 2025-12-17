@@ -1,0 +1,66 @@
+# ================================
+# .gitignore for Carlos Tangarife Portfolio
+# ================================
+
+# MacOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# Linux
+*~
+.directory
+
+# IDEs / Editors
+.vscode/
+.idea/
+*.swp
+*.swo
+*.swn
+.vim/
+*.sublime-project
+*.sublime-workspace
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Environment files (if you add any)
+.env
+.env.local
+.env.production
+
+# Temporary files
+*.tmp
+*.temp
+*.bak
+*.cache
+
+# Build outputs (if you add build process)
+dist/
+build/
+out/
+
+# Node modules (if you add npm/node later)
+node_modules/
+
+# AWS / Deployment
+.aws-sam/
+
+# Local test files
+test.html
+test/
+
+# Personal notes
+notes.txt
+TODO.txt
+
