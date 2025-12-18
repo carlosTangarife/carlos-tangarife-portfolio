@@ -285,6 +285,6 @@ window.addEventListener('load', calculateJobDuration);
 // ====== Console Easter Egg ======
 console.log('%c👋 Hello there, fellow developer!', 'color: #D4AF37; font-size: 20px; font-weight: bold;');
 console.log('%cInterested in working together?', 'color: #F4E5C3; font-size: 14px;');
-console.log('%cLet\'s connect: carlos@carlostangarife.com', 'color: #E8E8E8; font-size: 12px;');
+console.log('%cLet\'s connect: cjt860826@gmail.com', 'color: #E8E8E8; font-size: 12px;');
 console.log('%c', 'font-size: 10px; padding: 20px; background: linear-gradient(90deg, #D4AF37 0%, #F4E5C3 100%);');
 

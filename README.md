@@ -8,7 +8,7 @@
 
 [![Portfolio](https://img.shields.io/badge/Portfolio-carlostangarife.com-gold?style=for-the-badge&logo=google-chrome)](https://carlostangarife.com)
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-Carlos%20Tangarife-blue?style=for-the-badge&logo=linkedin)](https://linkedin.com/in/carlostangarife)
-[![Email](https://img.shields.io/badge/Email-carlos@carlostangarife.com-red?style=for-the-badge&logo=gmail)](mailto:carlos@carlostangarife.com)
+[![Email](https://img.shields.io/badge/Email-cjt860826@gmail.com-red?style=for-the-badge&logo=gmail)](mailto:cjt860826@gmail.com)
 
 📍 **Manizales, Colombia** | 🌍 **Available for Remote Work**
 
@@ -163,7 +163,7 @@ I'm always open to discussing new projects, innovative ideas, or opportunities t
 
 - 🌐 **Portfolio**: [carlostangarife.com](https://carlostangarife.com)
 - 💼 **LinkedIn**: [linkedin.com/in/carlostangarife](https://linkedin.com/in/carlostangarife)
-- 📧 **Email**: [carlos@carlostangarife.com](mailto:carlos@carlostangarife.com)
+- 📧 **Email**: [cjt860826@gmail.com](mailto:cjt860826@gmail.com)
 - 📱 **WhatsApp**: [+57 301 229 5992](https://wa.me/573012295992)
 - 📍 **Location**: Manizales, Colombia
 
