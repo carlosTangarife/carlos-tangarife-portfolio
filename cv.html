@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carlos Tangarife - Senior Software Engineer - CV</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --color-primary: #1a1a1a;
+            --color-secondary: #2d2d2d;
+            --color-accent: #D4AF37;
+            --color-text: #333333;
+            --color-text-light: #666666;
+            --color-border: #e0e0e0;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            color: var(--color-text);
+            line-height: 1.4;
+            font-size: 9.5pt;
+            background: #ffffff;
+        }
+
+        @media print {
+            body {
+                font-size: 9pt;
+            }
+            
+            .page-break {
+                page-break-after: always;
+            }
+            
+            @page {
+                size: A4;
+                margin: 0.8cm;
+            }
+        }
+
+        .container {
+            max-width: 210mm;
+            margin: 0 auto;
+            padding: 8px;
+        }
+
+        /* Header */
+        .header {
+            border-bottom: 2px solid var(--color-accent);
+            padding-bottom: 6px;
+            margin-bottom: 10px;
+        }
+
+        .header h1 {
+            font-size: 22pt;
+            font-weight: 700;
+            color: var(--color-primary);
+            margin-bottom: 3px;
+        }
+
+        .header .subtitle {
+            font-size: 11pt;
+            color: var(--color-accent);
+            font-weight: 600;
+            margin-bottom: 6px;
+        }
+
+        .header .contact {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            font-size: 7.5pt;
+            color: var(--color-text-light);
+        }
+
+        .header .contact span {
+            display: flex;
+            align-items: center;
+            gap: 3px;
+        }
+
+        /* Summary */
+        .summary {
+            margin-bottom: 10px;
+            padding: 8px;
+            background: #f8f8f8;
+            border-left: 3px solid var(--color-accent);
+        }
+
+        .summary h2 {
+            font-size: 10pt;
+            font-weight: 700;
+            color: var(--color-primary);
+            margin-bottom: 5px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .summary p {
+            font-size: 8.5pt;
+            color: var(--color-text);
+            line-height: 1.5;
+        }
+
+        /* Section */
+        .section {
+            margin-bottom: 10px;
+        }
+
+        .section-title {
+            font-size: 11pt;
+            font-weight: 700;
+            color: var(--color-primary);
+            border-bottom: 1.5px solid var(--color-accent);
+            padding-bottom: 2px;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* Experience */
+        .experience-item {
+            margin-bottom: 10px;
+            page-break-inside: avoid;
+        }
+
+        .experience-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 5px;
+        }
+
+        .experience-title {
+            font-size: 10pt;
+            font-weight: 700;
+            color: var(--color-primary);
+        }
+
+        .experience-company {
+            font-size: 9pt;
+            font-weight: 600;
+            color: var(--color-accent);
+            margin-top: 1px;
+        }
+
+        .experience-date {
+            font-size: 8pt;
+            color: var(--color-text-light);
+            font-weight: 500;
+            white-space: nowrap;
+        }
+
+        .experience-description {
+            font-size: 8.5pt;
+            color: var(--color-text);
+            margin-bottom: 6px;
+            line-height: 1.4;
+        }
+
+        .experience-highlights {
+            list-style: none;
+            margin-left: 0;
+            padding-left: 0;
+        }
+
+        .experience-highlights li {
+            font-size: 8pt;
+            color: var(--color-text);
+            margin-bottom: 3px;
+            padding-left: 12px;
+            position: relative;
+            line-height: 1.35;
+        }
+
+        .experience-highlights li::before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            color: var(--color-accent);
+            font-weight: bold;
+            font-size: 7pt;
+        }
+
+        .experience-tech {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 4px;
+            margin-top: 6px;
+        }
+
+        .experience-tech span {
+            font-size: 7pt;
+            padding: 2px 6px;
+            background: #f0f0f0;
+            border: 1px solid var(--color-border);
+            border-radius: 2px;
+            color: var(--color-text);
+            font-weight: 500;
+        }
+
+        /* Skills */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 6px;
+        }
+
+        .skill-category {
+            page-break-inside: avoid;
+        }
+
+        .skill-category h3 {
+            font-size: 8.5pt;
+            font-weight: 600;
+            color: var(--color-primary);
+            margin-bottom: 3px;
+            border-bottom: 1px solid var(--color-border);
+            padding-bottom: 1px;
+        }
+
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 3px;
+        }
+
+        .skill-tags span {
+            font-size: 7.5pt;
+            color: var(--color-text);
+        }
+
+        /* Key Achievements */
+        .achievements {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 6px;
+            margin-top: 6px;
+        }
+
+        .achievement-item {
+            padding: 5px;
+            background: #f8f8f8;
+            border-left: 2px solid var(--color-accent);
+            page-break-inside: avoid;
+        }
+
+        .achievement-number {
+            font-size: 14pt;
+            font-weight: 700;
+            color: var(--color-accent);
+            line-height: 1;
+        }
+
+        .achievement-label {
+            font-size: 7pt;
+            color: var(--color-text);
+            margin-top: 2px;
+            font-weight: 500;
+            line-height: 1.2;
+        }
+
+        /* Utilities */
+        .text-bold {
+            font-weight: 700;
+        }
+
+        .text-accent {
+            color: var(--color-accent);
+        }
+
+        @media print {
+            .container {
+                padding: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1>Carlos Javier Tangarife Gil</h1>
+            <div class="subtitle">Senior Software Engineer</div>
+            <div class="contact">
+                <span>📧 cjt860826@gmail.com</span>
+                <span>📱 +57 301 229 5992</span>
+                <span>🌐 linkedin.com/in/carlostangarife</span>
+                <span>💼 github.com/carlostangarife</span>
+                <span>📍 Manizales, Colombia · Available for Remote Work</span>
+            </div>
+        </div>
+
+        <!-- Professional Summary -->
+        <div class="summary">
+            <h2>Professional Summary</h2>
+            <p>
+                <strong>Senior Software Engineer</strong> with 11+ years specializing in Cloud Architecture (AWS/Azure), Full-Stack Development, 
+                and Legacy Modernization. Reduced technical debt by 70%, optimized infrastructure costs, and delivered scalable solutions for 3M+ users. 
+                Expert in React, TypeScript, .NET Core, and AI-assisted development.
+            </p>
+        </div>
+
+        <!-- Key Achievements -->
+        <div class="section">
+            <h2 class="section-title">Key Achievements</h2>
+            <div class="achievements">
+                <div class="achievement-item">
+                    <div class="achievement-number">70%</div>
+                    <div class="achievement-label">AWS Infrastructure Cost Reduction</div>
+                </div>
+                <div class="achievement-item">
+                    <div class="achievement-number">47%</div>
+                    <div class="achievement-label">Technical Debt Reduction</div>
+                </div>
+                <div class="achievement-item">
+                    <div class="achievement-number">96%</div>
+                    <div class="achievement-label">Database Performance Improvement</div>
+                </div>
+                <div class="achievement-item">
+                    <div class="achievement-number">40%</div>
+                    <div class="achievement-label">Delivery Speed Increase</div>
+                </div>
+                <div class="achievement-item">
+                    <div class="achievement-number">3M+</div>
+                    <div class="achievement-label">Users Impacted</div>
+                </div>
+                <div class="achievement-item">
+                    <div class="achievement-number">95%+</div>
+                    <div class="achievement-label">Code Coverage Achievement</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Professional Experience -->
+        <div class="section">
+            <h2 class="section-title">Professional Experience</h2>
+
+            <!-- Experience 1: Sombra / CampMinder -->
+            <div class="experience-item">
+                <div class="experience-header">
+                    <div>
+                        <div class="experience-title">Senior Software Engineer</div>
+                        <div class="experience-company">Sombra · Client: CampMinder (USA)</div>
+                    </div>
+                    <div class="experience-date">Nov 2024 - Present</div>
+                </div>
+                <div class="experience-description">
+                    Leading modernization initiatives for legacy camp management platform serving diverse subscriptions with complex 
+                    role-based permissions and feature flag configurations. Pioneering AI-assisted development practices and establishing 
+                    architectural standards across multiple applications.
+                </div>
+                <ul class="experience-highlights">
+                    <li><strong>Reduced 160 legacy .NET projects to 85 (47% reduction)</strong> through systematic refactoring, consolidating duplicate code, and implementing Clean Architecture principles, significantly reducing maintenance overhead</li>
+                    <li><strong>Architected Communication Hub (CMS platform)</strong> for multi-channel messaging via Twilio, enabling unified communication workflows across email, SMS, and push notifications with centralized configuration</li>
+                    <li><strong>Pioneered AI adoption initiative</strong> using Cursor and ChatGPT, establishing best practices, training team members, and increasing delivery speed by 40% through automated workflows</li>
+                    <li><strong>Built internal package ecosystem with Turborepo</strong> enabling code reuse across 10+ applications, reducing duplication and improving consistency across the platform</li>
+                    <li>Established CI/CD pipelines with Azure DevOps, implementing automated testing and deployment workflows, and mentored team members on modern React patterns, TypeScript best practices, and component architecture</li>
+                </ul>
+                <div class="experience-tech">
+                    <span>React</span>
+                    <span>TypeScript</span>
+                    <span>Vite</span>
+                    <span>Chakra UI</span>
+                    <span>.NET 8</span>
+                    <span>Azure DevOps</span>
+                    <span>Docker</span>
+                    <span>Cursor AI</span>
+                    <span>Clean Architecture</span>
+                    <span>Turborepo</span>
+                </div>
+            </div>
+
+            <!-- Experience 2: Avenue Code / Blink Fitness -->
+            <div class="experience-item">
+                <div class="experience-header">
+                    <div>
+                        <div class="experience-title">Senior Full Stack Engineer</div>
+                        <div class="experience-company">Avenue Code · Client: Blink Fitness (USA)</div>
+                    </div>
+                    <div class="experience-date">2022 - 2024</div>
+                </div>
+                <div class="experience-description">
+                    Developed mission-critical mobile and web applications for nationwide gym chain serving 3+ million active users, 
+                    managing memberships, training programs, and real-time facility tracking. Focused on serverless architecture, 
+                    performance optimization, and scalable solutions.
+                </div>
+                <ul class="experience-highlights">
+                    <li><strong>Reduced 200 AWS Lambda functions to 60 (70% reduction)</strong> while improving overall performance through strategic consolidation, shared libraries, and optimized cold start times, resulting in significant cost savings and improved scalability</li>
+                    <li><strong>Built Crowd Tracker feature</strong> for real-time gym occupancy monitoring using WebSockets and DynamoDB streams, enabling users to check facility capacity before visiting and improving user experience</li>
+                    <li><strong>Architected dual-CMS platform</strong> integrating WordPress and Contentful for dynamic content delivery, providing flexibility for marketing teams while maintaining performance and scalability</li>
+                    <li><strong>Implemented comprehensive test automation</strong> achieving 85%+ code coverage with Jest and Cypress, establishing quality gates in CI/CD pipeline and reducing bug rates significantly</li>
+                    <li>Optimized DynamoDB queries and implemented caching strategies using CloudFront and Redis, reducing API response times by 60% and improving user experience</li>
+                    <li>Led code reviews and established coding standards, improving code quality, team collaboration, and knowledge sharing across distributed teams</li>
+                </ul>
+                <div class="experience-tech">
+                    <span>Angular</span>
+                    <span>Ionic</span>
+                    <span>Node.js</span>
+                    <span>AWS Lambda</span>
+                    <span>DynamoDB</span>
+                    <span>TypeScript</span>
+                    <span>Serverless Framework</span>
+                    <span>API Gateway</span>
+                    <span>CloudFront</span>
+                    <span>Jest</span>
+                    <span>Cypress</span>
+                </div>
+            </div>
+
+            <!-- Experience 3: CEIBA SOFTWARE -->
+            <div class="experience-item">
+                <div class="experience-header">
+                    <div>
+                        <div class="experience-title">Developer and Architect</div>
+                        <div class="experience-company">CEIBA SOFTWARE · Medellín, Colombia</div>
+                    </div>
+                    <div class="experience-date">2019 - 2021</div>
+                </div>
+                <div class="experience-description">
+                    Evolved into client-facing technical leader for large-scale enterprise projects. Led front-end architecture 
+                    standardization, mentored teams on Angular/TypeScript best practices, and established enterprise architectural 
+                    principles (DI, IoC, SOLID) across the organization.
+                </div>
+                <ul class="experience-highlights">
+                    <li><strong>Led standardization effort</strong> creating shared Angular library with Material Design, centralizing rendering logic and permissions, reducing development time by 50% and becoming reference architecture within Ceiba</li>
+                    <li><strong>Improved performance by 80%</strong> implementing infinite scrolling, lazy loading, and OnPush change detection for pages with 20,000+ elements in Renting Colombia project, significantly enhancing user experience</li>
+                    <li><strong>Redesigned cross-application authentication</strong> with Azure AD B2C and MSAL, providing unified login across 15 interconnected Angular applications, simplifying user access and improving security</li>
+                    <li><strong>Mastered Webpack at native level</strong> combining legacy AngularJS with Vue.js frontend built entirely with Web Components for Venndelo marketplace project, enabling seamless legacy system integration</li>
+                    <li><strong>Established NestJS backend</strong> with Clean Architecture and TypeORM, drastically improving performance and stability compared to legacy PHP systems, reducing response times by 70%</li>
+                    <li>Implemented automated E2E testing with Twine and Gherkin, establishing shared understanding between developers, QA, and business stakeholders, and mentored junior developers on TypeScript, Angular patterns, and architectural best practices</li>
+                </ul>
+                <div class="experience-tech">
+                    <span>Angular</span>
+                    <span>TypeScript</span>
+                    <span>.NET Core</span>
+                    <span>Vue.js</span>
+                    <span>Webpack</span>
+                    <span>Web Components</span>
+                    <span>NestJS</span>
+                    <span>TypeORM</span>
+                    <span>PostgreSQL</span>
+                    <span>Azure AD B2C</span>
+                    <span>MSAL</span>
+                    <span>SignalR</span>
+                    <span>Microservices</span>
+                    <span>Azure DevOps</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Technical Skills -->
+        <div class="section">
+            <h2 class="section-title">Technical Skills</h2>
+            <div class="skills-grid">
+                <div class="skill-category">
+                    <h3>Frontend Engineering</h3>
+                    <div class="skill-tags">
+                        <span>React, TypeScript, Angular, Vue.js, Vite, Webpack, Chakra UI, Ionic, SASS/SCSS, Storybook, Web Components</span>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h3>Backend Engineering</h3>
+                    <div class="skill-tags">
+                        <span>Node.js, C#, .NET Core, NestJS, Express, Clean Architecture, SOLID, Microservices, CQRS, SignalR</span>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h3>Cloud & Infrastructure</h3>
+                    <div class="skill-tags">
+                        <span>AWS Lambda, API Gateway, DynamoDB, S3, CloudFront, Azure DevOps, Azure App Service, Cognito, CloudWatch, SNS/SQS</span>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h3>Database & Data</h3>
+                    <div class="skill-tags">
+                        <span>PostgreSQL, SQL Server, MongoDB, Oracle, TypeORM, Query Optimization, Indexing, PL/SQL</span>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h3>Testing & Quality</h3>
+                    <div class="skill-tags">
+                        <span>Vitest, Cypress, Playwright, Jest, SpecFlow, SonarQube, BDD/TDD, E2E Testing</span>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h3>DevOps & Tools</h3>
+                    <div class="skill-tags">
+                        <span>Docker, CI/CD Pipelines, Azure DevOps, GitHub Actions, Jenkins, Serverless Framework, Git, Jira</span>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h3>AI-Assisted Development</h3>
+                    <div class="skill-tags">
+                        <span>Cursor, ChatGPT, Automated Workflows, Prompt Engineering, Gherkin Language</span>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h3>Methodologies</h3>
+                    <div class="skill-tags">
+                        <span>Agile/Scrum, Clean Code, DDD, Design Patterns, Code Review, Pair Programming, Feature Flags</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Career Highlights -->
+        <div class="section">
+            <h2 class="section-title">Career Highlights & Contributions</h2>
+            <ul class="experience-highlights">
+                <li><strong>Technical Leadership:</strong> Established architectural standards and best practices across multiple organizations, mentoring teams and driving technical excellence through code reviews, pair programming, and knowledge sharing sessions</li>
+                <li><strong>Cost Optimization:</strong> Consistently reduced infrastructure costs through strategic consolidation, serverless architecture, and performance optimization, achieving up to 70% cost reduction while maintaining or improving system performance</li>
+                <li><strong>Legacy Modernization:</strong> Specialized expertise in transforming legacy systems into modern, maintainable solutions using Clean Architecture, SOLID principles, and modern development practices, reducing technical debt by up to 47%</li>
+                <li><strong>Quality Assurance:</strong> Championed automated testing and CI/CD practices, achieving 85-95%+ code coverage and reducing bug rates significantly through comprehensive test strategies including unit, integration, and E2E testing</li>
+                <li><strong>Innovation:</strong> Early adopter of AI-assisted development tools (Cursor, ChatGPT), increasing team productivity by 40% and establishing best practices for AI-augmented workflows and prompt engineering</li>
+                <li><strong>Scalability:</strong> Built and optimized applications serving millions of users, focusing on performance, reliability, and user experience through scalable architectures, caching strategies, and performance monitoring</li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>
+

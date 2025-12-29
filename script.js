@@ -242,45 +242,25 @@ window.addEventListener('scroll', () => {
     });
 });
 
-// ====== Dynamic Date Calculation for Current Job ======
-const calculateJobDuration = () => {
+// ====== Dynamic Date Display for Current Job ======
+const displayCurrentJobDate = () => {
     const timelineDate = document.querySelector('.timeline-date[data-start]');
     if (!timelineDate) return;
     
     const startDate = timelineDate.getAttribute('data-start'); // Format: "YYYY-MM"
     const [startYear, startMonth] = startDate.split('-').map(Number);
     
-    const now = new Date();
-    const currentYear = now.getFullYear();
-    const currentMonth = now.getMonth() + 1; // JavaScript months are 0-indexed
-    
-    // Calculate total months
-    const totalMonths = (currentYear - startYear) * 12 + (currentMonth - startMonth);
-    const years = Math.floor(totalMonths / 12);
-    const months = totalMonths % 12;
-    
-    // Format duration string
-    let durationText = '';
-    if (years > 0 && months > 0) {
-        durationText = ` (${years} year${years > 1 ? 's' : ''} ${months} month${months > 1 ? 's' : ''})`;
-    } else if (years > 0) {
-        durationText = ` (${years} year${years > 1 ? 's' : ''})`;
-    } else if (months > 0) {
-        durationText = ` (${months} month${months > 1 ? 's' : ''})`;
-    }
-    
     // Get month names
     const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 
                         'July', 'August', 'September', 'October', 'November', 'December'];
     const startMonthName = monthNames[startMonth - 1];
-    const currentMonthName = monthNames[currentMonth - 1];
     
-    // Update the text
-    timelineDate.textContent = `${startMonthName} ${startYear} - ${currentMonthName} ${currentYear}${durationText}`;
+    // Display: "November 2024 - Present"
+    timelineDate.textContent = `${startMonthName} ${startYear} - Present`;
 };
 
 // Run on page load
-window.addEventListener('load', calculateJobDuration);
+window.addEventListener('load', displayCurrentJobDate);
 
 // ====== Console Easter Egg ======
 console.log('%c👋 Hello there, fellow developer!', 'color: #D4AF37; font-size: 20px; font-weight: bold;');
