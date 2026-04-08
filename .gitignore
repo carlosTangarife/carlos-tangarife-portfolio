@@ -45,10 +45,11 @@ yarn-error.log*
 *.bak
 *.cache
 
-# Build outputs (if you add build process)
+# Build outputs
 dist/
 build/
 out/
+.next/
 
 # Node modules (if you add npm/node later)
 node_modules/
