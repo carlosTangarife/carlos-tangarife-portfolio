@@ -2,9 +2,12 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { profile } from "@/data/profile";
 
+export const metadataBase = new URL('https://carlostangarife.com');
+
 export const metadata: Metadata = {
   title: `${profile.name} | ${profile.title} - ${profile.tagline}`,
   description: profile.summary,
+  metadataBase,
   keywords: [
     "senior software engineer",
     "freelance software engineer",

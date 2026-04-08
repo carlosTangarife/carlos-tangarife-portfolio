@@ -3,13 +3,9 @@
 User-agent: *
 Allow: /
 
-# Sitemap location
+# Sitemap
 Sitemap: https://carlostangarife.com/sitemap.xml
 
-# Crawl-delay (optional, in seconds)
-Crawl-delay: 0
-
-# Block specific crawlers (if needed)
-# User-agent: BadBot
-# Disallow: /
-
+# Disallow private/empty paths (future-proofing)
+Disallow: /api/
+Disallow: /*.json$
