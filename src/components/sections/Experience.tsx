@@ -1,6 +1,18 @@
+"use client";
+
+import { useState } from "react";
 import { experiences } from "@/data/experience";
 
 export default function Experience() {
+  const [expandedProjects, setExpandedProjects] = useState<Record<string, boolean>>({});
+
+  const toggleProject = (key: string) => {
+    setExpandedProjects((prev) => ({
+      ...prev,
+      [key]: !prev[key],
+    }));
+  };
+
   return (
     <section id="experience" className="py-24 bg-bg-secondary">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
@@ -31,6 +43,7 @@ export default function Experience() {
                     <div className="text-text-muted">
                       {exp.company}
                       {exp.client && <span> · Client: {exp.client}</span>}
+                      {exp.location && exp.location !== "Remote" && <span> · {exp.location}</span>}
                     </div>
                   </div>
 
@@ -49,28 +62,55 @@ export default function Experience() {
                     </ul>
                   )}
 
-                  {/* Projects (if any) */}
-                  {exp.projects && exp.projects.map((project) => (
-                    <div key={project.name} className="mt-6 pt-6 border-t border-gold/10">
-                      <h4 className="text-lg font-semibold text-gold-light mb-3">{project.name}</h4>
-                      <p className="text-text-muted text-sm mb-4">{project.description}</p>
-                      <ul className="space-y-2 mb-4">
-                        {project.highlights.map((highlight, index) => (
-                          <li key={index} className="flex items-start gap-3 text-text-muted text-sm">
-                            <span className="text-gold mt-0.5">▹</span>
-                            <span>{highlight}</span>
-                          </li>
-                        ))}
-                      </ul>
-                      <div className="flex flex-wrap gap-2">
-                        {project.technologies.map((tech) => (
-                          <span key={tech} className="px-3 py-1 text-xs text-gold bg-gold/10 border border-gold/20 rounded">
-                            {tech}
-                          </span>
-                        ))}
-                      </div>
+                  {/* Projects (if any) - Expandable */}
+                  {exp.projects && exp.projects.length > 0 && (
+                    <div className="space-y-4 mt-6 pt-6 border-t border-gold/10">
+                      <h4 className="text-sm font-semibold text-gold uppercase tracking-wider">Projects</h4>
+                      {exp.projects.map((project) => {
+                        const projectKey = `${exp.id}-${project.name}`;
+                        const isExpanded = expandedProjects[projectKey];
+
+                        return (
+                          <div key={project.name} className="bg-bg-secondary rounded-lg overflow-hidden">
+                            {/* Project Header (clickable) */}
+                            <button
+                              onClick={() => toggleProject(projectKey)}
+                              className="w-full flex items-center justify-between p-4 text-left hover:bg-gold/5 transition-colors"
+                            >
+                              <h5 className="text-gold-light font-semibold">{project.name}</h5>
+                              <span className={`text-gold transition-transform ${isExpanded ? "rotate-180" : ""}`}>
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                                  <polyline points="6 9 12 15 18 9" />
+                                </svg>
+                              </span>
+                            </button>
+
+                            {/* Project Content (collapsible) */}
+                            {isExpanded && (
+                              <div className="px-4 pb-4">
+                                <p className="text-text-muted text-sm mb-4">{project.description}</p>
+                                <ul className="space-y-2 mb-4">
+                                  {project.highlights.map((highlight, index) => (
+                                    <li key={index} className="flex items-start gap-3 text-text-muted text-sm">
+                                      <span className="text-gold mt-0.5">▹</span>
+                                      <span>{highlight}</span>
+                                    </li>
+                                  ))}
+                                </ul>
+                                <div className="flex flex-wrap gap-2">
+                                  {project.technologies.map((tech) => (
+                                    <span key={tech} className="px-3 py-1 text-xs text-gold bg-gold/10 border border-gold/20 rounded">
+                                      {tech}
+                                    </span>
+                                  ))}
+                                </div>
+                              </div>
+                            )}
+                          </div>
+                        );
+                      })}
                     </div>
-                  ))}
+                  )}
 
                   {/* Technologies */}
                   <div className="flex flex-wrap gap-2 mt-6 pt-6 border-t border-gold/10">

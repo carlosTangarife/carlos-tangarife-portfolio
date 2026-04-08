@@ -1,4 +1,5 @@
 import { profile } from "@/data/profile";
+import CVDownloadModal from "@/components/cv/CVDownloadModal";
 
 const contactMethods = [
   {
@@ -56,7 +57,7 @@ export default function Contact() {
         </div>
 
         {/* Contact Grid */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-12">
           {contactMethods.map((method) => (
             <a
               key={method.label}
@@ -71,6 +72,12 @@ export default function Contact() {
               <span className="text-text-primary font-semibold">{method.label}</span>
             </a>
           ))}
+        </div>
+
+        {/* CV Download */}
+        <div className="text-center">
+          <p className="text-text-muted mb-4">Get my full CV in your preferred format</p>
+          <CVDownloadModal />
         </div>
       </div>
     </section>
