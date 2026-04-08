@@ -45,11 +45,9 @@ yarn-error.log*
 *.bak
 *.cache
 
-# Build outputs
-dist/
-build/
-out/
+# Next.js
 .next/
+next-env.d.ts
 
 # Node modules (if you add npm/node later)
 node_modules/
