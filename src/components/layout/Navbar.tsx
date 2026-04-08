@@ -3,19 +3,24 @@
 import { useState } from "react";
 import Link from "next/link";
 
-const navLinks = [
-  { href: "#about", label: "About" },
-  { href: "#impact", label: "Impact" },
-  { href: "#experience", label: "Experience" },
-  { href: "#skills", label: "Skills" },
-  { href: "#ai-skills", label: "AI Tools" },
-  { href: "#contact", label: "Let's Talk" },
+const navLinks: { href: string; label: string; isPage?: boolean }[] = [
+  { href: "/#about", label: "About" },
+  { href: "/#impact", label: "Impact" },
+  { href: "/experience", label: "Experience", isPage: true },
+  { href: "/#skills", label: "Skills" },
+  { href: "/#ai-skills", label: "AI Tools" },
+  { href: "/cv", label: "Download CV", isPage: true },
+  { href: "/#contact", label: "Let's Talk" },
 ];
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
 
-  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string, isPage?: boolean) => {
+    // For page links (like /cv), allow default navigation
+    if (isPage || href.startsWith('/')) {
+      return;
+    }
     e.preventDefault();
     setIsOpen(false);
     const element = document.querySelector(href);
@@ -40,11 +45,13 @@ export default function Navbar() {
               <a
                 key={link.href}
                 href={link.href}
-                onClick={(e) => handleNavClick(e, link.href)}
+                onClick={(e) => handleNavClick(e, link.href, link.isPage)}
                 className={`text-sm font-medium transition-colors hover:text-gold ${
                   link.href === "#contact"
                     ? "px-4 py-2 bg-gold text-bg-primary rounded-lg hover:bg-gold-light"
-                    : "text-text-secondary"
+                    : link.isPage
+                      ? "px-4 py-2 border border-gold text-gold rounded-lg hover:bg-gold hover:text-bg-primary"
+                      : "text-text-secondary"
                 }`}
               >
                 {link.label}
@@ -71,9 +78,9 @@ export default function Navbar() {
               <a
                 key={link.href}
                 href={link.href}
-                onClick={(e) => handleNavClick(e, link.href)}
+                onClick={(e) => handleNavClick(e, link.href, link.isPage)}
                 className={`text-lg font-medium py-2 border-b border-gold/10 ${
-                  link.href === "#contact" ? "text-gold" : "text-text-secondary"
+                  link.href === "#contact" || link.isPage ? "text-gold" : "text-text-secondary"
                 }`}
               >
                 {link.label}

@@ -1,5 +1,5 @@
 import { profile } from "@/data/profile";
-import CVDownloadModal from "@/components/cv/CVDownloadModal";
+import Link from "next/link";
 
 const contactMethods = [
   {
@@ -77,7 +77,24 @@ export default function Contact() {
         {/* CV Download */}
         <div className="text-center">
           <p className="text-text-muted mb-4">Get my full CV in your preferred format</p>
-          <CVDownloadModal />
+          <Link 
+            href="/cv"
+            className="inline-flex items-center gap-2 px-6 py-3 bg-gold text-bg-primary font-semibold rounded-lg hover:bg-gold-light hover:shadow-gold-glow transition-all"
+          >
+            <svg
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+            >
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+              <polyline points="7 10 12 15 17 10" />
+              <line x1="12" y1="15" x2="12" y2="3" />
+            </svg>
+            Download CV
+          </Link>
         </div>
       </div>
     </section>

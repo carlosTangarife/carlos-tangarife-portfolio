@@ -1,129 +1,105 @@
 "use client";
 
-import { useState } from "react";
 import { experiences } from "@/data/experience";
+import Link from "next/link";
+
+// Helper to create SEO-friendly slug from company and role
+function createSlug(company: string, role: string): string {
+  const cleanCompany = company.toLowerCase().replace(/[^a-z0-9]/g, '-').replace(/-+/g, '-');
+  const cleanRole = role.toLowerCase().replace(/[^a-z0-9]/g, '-').replace(/-+/g, '-');
+  return `${cleanCompany}-${cleanRole}`;
+}
+
+// Get only the 2 most recent experiences
+const recentExperiences = experiences.slice(0, 2);
 
 export default function Experience() {
-  const [expandedProjects, setExpandedProjects] = useState<Record<string, boolean>>({});
-
-  const toggleProject = (key: string) => {
-    setExpandedProjects((prev) => ({
-      ...prev,
-      [key]: !prev[key],
-    }));
-  };
-
   return (
     <section id="experience" className="py-24 bg-bg-secondary">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         {/* Section Header */}
-        <div className="mb-16">
-          <span className="inline-block text-gold text-sm font-semibold uppercase tracking-wider mb-4">Professional Journey</span>
-          <h2 className="text-4xl font-bold text-text-primary font-display">Experience Timeline</h2>
+        <div className="mb-12">
+          <span className="inline-block text-gold text-sm font-semibold uppercase tracking-wider mb-4">Recent Work</span>
+          <h2 className="text-4xl font-bold text-text-primary font-display">Experience Highlights</h2>
         </div>
 
-        {/* Timeline */}
-        <div className="relative pl-8 md:pl-12">
-          {/* Vertical Line */}
-          <div className="absolute left-0 top-0 bottom-0 w-0.5 bg-gradient-to-b from-gold via-gold/30 to-gold/10" />
-
-          {/* Experience Items */}
-          <div className="space-y-12">
-            {experiences.map((exp) => (
-              <div key={exp.id} className="relative">
-                {/* Marker */}
-                <div className="absolute -left-[36px] md:-left-[52px] top-0 w-3 h-3 bg-gold rounded-full border-4 border-bg-secondary shadow-lg" />
-
-                {/* Content */}
-                <div className="bg-bg-card border border-gold/10 rounded-lg p-8 hover:border-gold hover:shadow-gold-md transition-all">
-                  {/* Header */}
-                  <div className="mb-4">
-                    <div className="text-gold text-sm font-semibold uppercase tracking-wider mb-2">{exp.period}</div>
-                    <h3 className="text-2xl font-bold text-text-primary mb-1">{exp.role}</h3>
-                    <div className="text-text-muted">
-                      {exp.company}
-                      {exp.client && <span> · Client: {exp.client}</span>}
-                      {exp.location && exp.location !== "Remote" && <span> · {exp.location}</span>}
-                    </div>
-                  </div>
-
-                  {/* Description */}
-                  <p className="text-text-secondary mb-6 leading-relaxed">{exp.description}</p>
-
-                  {/* Highlights */}
-                  {exp.highlights && exp.highlights.length > 0 && (
-                    <ul className="space-y-3 mb-6">
-                      {exp.highlights.map((highlight, index) => (
-                        <li key={index} className="flex items-start gap-3 text-text-muted">
-                          <span className="text-gold font-bold mt-1">▹</span>
-                          <span>{highlight}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  )}
-
-                  {/* Projects (if any) - Expandable */}
-                  {exp.projects && exp.projects.length > 0 && (
-                    <div className="space-y-4 mt-6 pt-6 border-t border-gold/10">
-                      <h4 className="text-sm font-semibold text-gold uppercase tracking-wider">Projects</h4>
-                      {exp.projects.map((project) => {
-                        const projectKey = `${exp.id}-${project.name}`;
-                        const isExpanded = expandedProjects[projectKey];
-
-                        return (
-                          <div key={project.name} className="bg-bg-secondary rounded-lg overflow-hidden">
-                            {/* Project Header (clickable) */}
-                            <button
-                              onClick={() => toggleProject(projectKey)}
-                              className="w-full flex items-center justify-between p-4 text-left hover:bg-gold/5 transition-colors"
-                            >
-                              <h5 className="text-gold-light font-semibold">{project.name}</h5>
-                              <span className={`text-gold transition-transform ${isExpanded ? "rotate-180" : ""}`}>
-                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                                  <polyline points="6 9 12 15 18 9" />
-                                </svg>
-                              </span>
-                            </button>
-
-                            {/* Project Content (collapsible) */}
-                            {isExpanded && (
-                              <div className="px-4 pb-4">
-                                <p className="text-text-muted text-sm mb-4">{project.description}</p>
-                                <ul className="space-y-2 mb-4">
-                                  {project.highlights.map((highlight, index) => (
-                                    <li key={index} className="flex items-start gap-3 text-text-muted text-sm">
-                                      <span className="text-gold mt-0.5">▹</span>
-                                      <span>{highlight}</span>
-                                    </li>
-                                  ))}
-                                </ul>
-                                <div className="flex flex-wrap gap-2">
-                                  {project.technologies.map((tech) => (
-                                    <span key={tech} className="px-3 py-1 text-xs text-gold bg-gold/10 border border-gold/20 rounded">
-                                      {tech}
-                                    </span>
-                                  ))}
-                                </div>
-                              </div>
-                            )}
-                          </div>
-                        );
-                      })}
-                    </div>
-                  )}
-
-                  {/* Technologies */}
-                  <div className="flex flex-wrap gap-2 mt-6 pt-6 border-t border-gold/10">
-                    {exp.technologies.map((tech) => (
-                      <span key={tech} className="px-3 py-1 text-xs text-gold bg-gold/10 border border-gold/20 rounded">
-                        {tech}
-                      </span>
-                    ))}
+        {/* Recent Experience Cards */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {recentExperiences.map((exp) => {
+            const slug = createSlug(exp.company, exp.role);
+            
+            return (
+              <div 
+                key={exp.id} 
+                className="bg-bg-card border border-gold/10 rounded-xl p-6 hover:border-gold hover:shadow-gold-md transition-all"
+              >
+                {/* Header */}
+                <div className="mb-4">
+                  <div className="text-gold text-sm font-semibold uppercase tracking-wider mb-2">{exp.period}</div>
+                  <h3 className="text-xl font-bold text-text-primary mb-1">{exp.role}</h3>
+                  <div className="text-text-muted">
+                    {exp.company}
+                    {exp.client && <span> · {exp.client}</span>}
                   </div>
                 </div>
+
+                {/* Brief Teaser - First 2-3 sentences */}
+                <p className="text-text-secondary mb-4 line-clamp-3">
+                  {exp.description}
+                </p>
+
+                {/* Key highlight */}
+                {exp.highlights && exp.highlights.length > 0 && (
+                  <div className="mb-4">
+                    <p className="text-gold text-sm">
+                      * {exp.highlights[0]}
+                    </p>
+                  </div>
+                )}
+
+                {/* Technologies Preview */}
+                <div className="flex flex-wrap gap-2 mb-4">
+                  {exp.technologies.slice(0, 5).map((tech) => (
+                    <span 
+                      key={tech} 
+                      className="px-2 py-1 text-xs text-gold bg-gold/10 border border-gold/20 rounded"
+                    >
+                      {tech}
+                    </span>
+                  ))}
+                  {exp.technologies.length > 5 && (
+                    <span className="px-2 py-1 text-xs text-text-muted">
+                      +{exp.technologies.length - 5} more
+                    </span>
+                  )}
+                </div>
+
+                {/* View Details Button */}
+                <Link 
+                  href={`/experience/${slug}`}
+                  className="inline-flex items-center gap-2 text-gold font-medium hover:underline"
+                >
+                  View Details
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <path d="M5 12h14M12 5l7 7-7 7" />
+                  </svg>
+                </Link>
               </div>
-            ))}
-          </div>
+            );
+          })}
+        </div>
+
+        {/* View All Link */}
+        <div className="mt-10 text-center">
+          <Link 
+            href="/experience"
+            className="inline-flex items-center gap-2 px-6 py-3 border border-gold text-gold font-semibold rounded-lg hover:bg-gold hover:text-bg-primary transition-all"
+          >
+            View All Experience
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <path d="M5 12h14M12 5l7 7-7 7" />
+            </svg>
+          </Link>
         </div>
       </div>
     </section>

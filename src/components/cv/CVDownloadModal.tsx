@@ -2,75 +2,7 @@
 
 import { useState } from "react";
 import { cvFormats, CVFormatId } from "@/data/cv-formats";
-import { profile } from "@/data/profile";
-import { experiences } from "@/data/experience";
-import { skillCategories } from "@/data/skills";
-import { impacts } from "@/data/impacts";
-
-function generateCVText(formatId: CVFormatId): string {
-  const lines: string[] = [];
-  
-  // Header
-  lines.push("═".repeat(60));
-  lines.push(profile.name.toUpperCase());
-  lines.push(profile.title);
-  lines.push("═".repeat(60));
-  lines.push("");
-  lines.push(`Location: ${profile.location}`);
-  lines.push(`Status: ${profile.availability}`);
-  lines.push(`Email: ${profile.email}`);
-  lines.push(`LinkedIn: ${profile.linkedin}`);
-  lines.push("");
-  lines.push("─".repeat(60));
-  
-  // Summary
-  lines.push("PROFESSIONAL SUMMARY");
-  lines.push("─".repeat(60));
-  lines.push(profile.summary);
-  lines.push("");
-  
-  // Key Metrics
-  lines.push("KEY ACHIEVEMENTS");
-  lines.push("─".repeat(60));
-  impacts.forEach((impact) => {
-    lines.push(`• ${impact.metric} - ${impact.title}`);
-    lines.push(`  ${impact.description}`);
-  });
-  lines.push("");
-  
-  // Technical Skills
-  lines.push("TECHNICAL EXPERTISE");
-  lines.push("─".repeat(60));
-  const expertSkills = skillCategories
-    .flatMap((cat) => cat.skills.filter((s) => s.level === "expert"))
-    .map((s) => s.name);
-  lines.push(expertSkills.join(" • "));
-  lines.push("");
-  
-  // Professional Experience
-  lines.push("PROFESSIONAL EXPERIENCE");
-  lines.push("─".repeat(60));
-  experiences.forEach((exp) => {
-    lines.push(`${exp.role}`);
-    lines.push(`${exp.company}${exp.client ? ` | ${exp.client}` : ""} | ${exp.period}`);
-    lines.push("");
-    lines.push(exp.description);
-    if (exp.highlights) {
-      exp.highlights.slice(0, 3).forEach((h) => {
-        lines.push(`  • ${h}`);
-      });
-    }
-    lines.push(`Technologies: ${exp.technologies.join(", ")}`);
-    lines.push("");
-  });
-  
-  // Footer
-  lines.push("─".repeat(60));
-  lines.push(`Generated: ${new Date().toLocaleDateString()}`);
-  lines.push(`Downloaded from: https://carlostangarife.com`);
-  
-  return lines.join("\n");
-}
+import { generatePDF } from "@/utils/pdf-generator";
 
 export default function CVDownloadModal() {
   const [isOpen, setIsOpen] = useState(false);
@@ -79,22 +11,11 @@ export default function CVDownloadModal() {
   const handleDownload = async (formatId: CVFormatId) => {
     setIsGenerating(true);
     try {
-      await new Promise((resolve) => setTimeout(resolve, 500));
-      
-      const content = generateCVText(formatId);
-      const blob = new Blob([content], { type: "text/plain;charset=utf-8" });
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement("a");
-      a.href = url;
-      a.download = `carlos-tangarife-cv-${formatId}.txt`;
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
-      URL.revokeObjectURL(url);
-      
+      await new Promise((resolve) => setTimeout(resolve, 300));
+      generatePDF(formatId);
       setIsOpen(false);
     } catch (error) {
-      console.error("Error generating CV:", error);
+      console.error("Error generating PDF:", error);
     } finally {
       setIsGenerating(false);
     }
@@ -182,7 +103,7 @@ export default function CVDownloadModal() {
                     <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none" />
                     <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
                   </svg>
-                  <span className="font-medium">Generating CV...</span>
+                  <span className="font-medium">Generating PDF...</span>
                 </div>
               </div>
             )}
@@ -190,7 +111,7 @@ export default function CVDownloadModal() {
             {/* Footer */}
             <div className="border-t border-gold/10 p-6 bg-bg-secondary/50">
               <p className="text-text-muted text-sm text-center">
-                CVs are generated as formatted text files. Open in any text editor and save as PDF for ATS submission.
+                All CVs are generated dynamically with the latest information
               </p>
             </div>
           </div>
