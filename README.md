@@ -108,7 +108,9 @@ This repository contains my personal portfolio website — currently a static HT
 
 I'm currently working on a **React + TypeScript + Next.js** migration to elevate the portfolio to the next level. See [PRD.md](PRD.md) for the complete product requirements document.
 
-**Current Stack**: Vanilla HTML/CSS/JS | AWS S3 + CloudFront + Route 53
+**Current Stack**: Next.js 14 + TypeScript + Tailwind CSS | AWS Amplify (planned)
+
+**Legacy Stack**: Vanilla HTML/CSS/JS | AWS S3 + CloudFront + Route 53
 
 **Target Stack**: Next.js + TypeScript + Tailwind + Vite
 
@@ -116,26 +118,54 @@ I'm currently working on a **React + TypeScript + Next.js** migration to elevate
 
 ```
 carlos-tangarife-portfolio/
-├── index.html           # Current static site
-├── styles.css           # Styles
-├── script.js            # Interactivity
-├── favicon.svg          # Logo
-├── robots.txt           # SEO
-├── sitemap.xml          # SEO
-├── deploy.ps1           # Windows deployment script
-├── deploy.sh            # Linux/Mac deployment script
-├── PRD.md               # Product Requirements Document
-└── docs/
-    └── AWS-DEPLOYMENT-GUIDE.md
+├── src/
+│   ├── app/                    # Next.js App Router
+│   │   ├── layout.tsx         # Root layout with metadata
+│   │   ├── page.tsx           # Main page
+│   │   └── globals.css        # Global styles + Tailwind
+│   │
+│   ├── components/
+│   │   ├── layout/            # Navbar, Footer
+│   │   └── sections/          # Hero, About, Impact, Experience, Skills, Contact
+│   │
+│   └── data/                  # TypeScript data files
+│       ├── profile.ts         # Personal info
+│       ├── experience.ts      # Work history
+│       ├── skills.ts          # Technical skills
+│       └── impacts.ts         # Achievement metrics
+│
+├── next.config.mjs            # Next.js configuration
+├── tailwind.config.js         # Tailwind CSS configuration
+├── tsconfig.json              # TypeScript configuration
+└── package.json               # Dependencies
+```
+
+### Development
+
+```bash
+# Install dependencies
+npm install
+
+# Run development server
+npm run dev
+
+# Build for production (static export)
+npm run build
 ```
 
 ### Deployment
 
-The site is deployed on AWS:
-- **S3**: Static hosting
-- **CloudFront**: CDN global distribution
-- **Route 53**: DNS management
-- **Certificate Manager**: SSL/TLS
+**Option 1: AWS Amplify (Recommended)**
+1. Connect GitHub repository to AWS Amplify
+2. Amplify automatically detects Next.js
+3. Deploy with SSR/SSG support
+
+**Option 2: AWS S3 + CloudFront**
+1. Run `npm run build` to generate static export
+2. Upload `.next/` or `out/` folder to S3
+3. Configure CloudFront distribution
+
+**Current**: Static HTML/CSS/JS site deployed on AWS S3 + CloudFront
 
 **Live URL**: https://carlostangarife.com
 
