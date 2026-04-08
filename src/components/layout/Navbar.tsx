@@ -8,6 +8,7 @@ const navLinks = [
   { href: "#impact", label: "Impact" },
   { href: "#experience", label: "Experience" },
   { href: "#skills", label: "Skills" },
+  { href: "#ai-skills", label: "AI Tools" },
   { href: "#contact", label: "Let's Talk" },
 ];
 
