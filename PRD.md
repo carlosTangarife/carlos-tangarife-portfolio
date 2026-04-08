@@ -11,7 +11,13 @@
 ## 1. Executive Summary
 
 ### Purpose
-Transform the existing static HTML/CSS/JS portfolio (carlostangarife.com) into a modern React + TypeScript application that reflects the professional stature of a Senior Software Engineer with 11+ years of experience.
+Transform the existing static HTML/CSS/JS portfolio (carlostangarife.com) into a modern **Next.js + React + TypeScript** application deployed on **AWS Amplify**, reflecting the professional stature of a Senior Software Engineer with 11+ years of experience.
+
+### Hosting Decision
+**AWS Amplify** selected as deployment platform:
+- **Free Tier**: 1,000 build minutes, 5GB CDN, 15GB transfer/month
+- **Cost**: $0/month for typical portfolio usage
+- **SSR/SSG**: Full server-side rendering support for maximum SEO
 
 ### Problem Statement
 Current portfolio is a static HTML site that:
@@ -143,22 +149,23 @@ The CV exports MUST share:
 ## 5. Technical Requirements
 
 ### TR-001: Framework & Language
-- **Framework**: React 18+ with Vite (SPA approach)
+- **Framework**: Next.js 14+ (App Router) - Selected for SSR/SSG and maximum SEO
 - **Language**: TypeScript (strict mode)
-- **Build Tool**: Vite
+- **Build Tool**: Vite (built into Next.js)
+- **Hosting**: AWS Amplify (free tier)
 
 ### TR-002: Styling
 - **Primary**: Tailwind CSS
 - **Fallback**: CSS Modules for complex components
 
 ### TR-003: Routing
-- React Router v6+ (if SPA) or Next.js App Router (if SSR)
-- Client-side navigation with prefetching
+- Next.js App Router with file-based routing
+- Server-side rendering for optimal SEO
 
 ### TR-004: SEO Tools
-- React Helmet for meta tags
-- sitemap generator plugin
-- react-schema-org for structured data
+- Next.js Metadata API (built-in)
+- next-sitemap for automatic sitemap generation
+- react-schema-org for structured data (JSON-LD)
 
 ### TR-005: Development Tools
 - **Linting**: ESLint with strict config
@@ -236,11 +243,11 @@ The CV exports MUST share:
 ## 8. Migration Roadmap
 
 ### Phase 1: Foundation (Week 1)
-- [ ] Initialize Vite + React + TypeScript project
+- [ ] Initialize Next.js 14+ (App Router) + TypeScript project
 - [ ] Configure ESLint, Prettier, TypeScript strict
 - [ ] Set up Tailwind CSS with current color palette
-- [ ] Create component directory structure
-- [ ] Configure React Router for navigation
+- [ ] Create component directory structure (app/, components/, lib/, data/)
+- [ ] Configure AWS Amplify for deployment
 
 ### Phase 2: Content Migration (Week 2)
 - [ ] Extract content from current index.html
@@ -250,16 +257,16 @@ The CV exports MUST share:
 - [ ] Add smooth scrolling navigation
 
 ### Phase 3: SEO & Performance (Week 3)
-- [ ] Implement React Helmet for meta tags
-- [ ] Generate dynamic sitemap.xml
-- [ ] Add JSON-LD structured data
-- [ ] Configure lazy loading for images
-- [ ] Implement code splitting with React.lazy
+- [ ] Implement Next.js Metadata API for SEO
+- [ ] Generate dynamic sitemap.xml with next-sitemap
+- [ ] Add JSON-LD structured data (schema.org)
+- [ ] Configure next/image for image optimization
+- [ ] Implement code splitting (automatic with Next.js)
 - [ ] Run Lighthouse audit and optimize
 
 ### Phase 4: Enhancement (Week 4 - Optional)
 - [ ] Add Framer Motion animations
-- [ ] Implement contact form
+- [ ] Implement contact form with API route
 - [ ] Set up CV download functionality
 - [ ] Add dark mode toggle (if desired)
 
@@ -297,13 +304,16 @@ The following are explicitly NOT in scope for this project:
 ## 11. Dependencies
 
 ### External
-- Vite (build tool)
-- React 18+ (framework)
-- Tailwind CSS (styling)
+- **Next.js 14+** (framework with SSR/SSG)
+- **React 18+** (library)
+- **Tailwind CSS** (styling)
+- **Vite** (build tool - built into Next.js)
+- **AWS Amplify** (deployment - free tier)
 
 ### Internal
 - Current portfolio content from index.html
 - Current CSS styles for design reference
+- CV data (source of truth)
 
 ---
 
@@ -318,29 +328,21 @@ The following are explicitly NOT in scope for this project:
 
 ---
 
-## 13. Future: Next.js Migration (Phase 2)
-
-This PRD covers **Phase 1: Vite SPA** implementation.
-
-A future Phase 2 will migrate to Next.js with SSR for maximum SEO:
-- Move to Next.js App Router
-- Deploy to AWS Amplify or similar
-- Enable SSR/SSG capabilities
-- Expected timeline: After Phase 1 is stable
-
----
-
 ## 13. Success Criteria
 
-- [ ] PRD approved by stakeholder
-- [ ] Tech stack confirmed (Next.js + TypeScript + Tailwind)
+- [ ] PRD approved by stakeholder ✅
+- [ ] Tech stack confirmed (Next.js + TypeScript + Tailwind + Amplify)
 - [ ] Design system extracted from current CSS
-- [ ] Migration roadmap finalized
 - [ ] Phase 1 implementation starts
 
 ---
 
 ## 14. Appendix
+
+### Deployment
+- **Platform**: AWS Amplify
+- **Free Tier**: 1,000 build mins, 5GB CDN, 15GB transfer/month
+- **Expected Cost**: $0/month (portfolio usage)
 
 ### Current Site Analysis
 - **URL**: https://carlostangarife.com
@@ -348,6 +350,16 @@ A future Phase 2 will migrate to Next.js with SSR for maximum SEO:
 - **Hosting**: AWS S3 + CloudFront + Route 53
 - **Performance**: Lighthouse 90+
 - **SEO**: Basic meta tags, sitemap, robots.txt
+
+### References
+- Next.js Documentation: https://nextjs.org/docs
+- Tailwind CSS: https://tailwindcss.com
+- TypeScript: https://www.typescriptlang.org
+- AWS Amplify: https://aws.amazon.com/amplify/
+
+---
+
+*This document will be updated as the project evolves.*
 
 ### References
 - Next.js Documentation: https://nextjs.org/docs
