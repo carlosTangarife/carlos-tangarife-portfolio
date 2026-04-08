@@ -48,6 +48,7 @@ yarn-error.log*
 # Next.js
 .next/
 next-env.d.ts
+out/
 
 # Node modules (if you add npm/node later)
 node_modules/
